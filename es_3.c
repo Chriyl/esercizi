@@ -26,7 +26,7 @@ int main() {
     persona persone[N];
 
     do {
-        check = stampa_menu(check);
+        check = stampa_menu(check);-
 
         switch (check) {
 
