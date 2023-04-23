@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <string.h>
 #include <stdbool.h>
 #define N 100
@@ -23,10 +21,12 @@ typedef struct {
 } persona;
 
 int stampa_menu(int);
-void aggiungi_persona(persona* );
 bool check_codice(persona*, int );
+void aggiungi_persona(persona* );
 void stampa_comune(persona*, int, char*);
 void stampa_codice(persona*, int, char*, char*);
+void sorting_cognome(persona* persone, int );
+void stampa_ordinato(persona*, int );
 
 int main() {
     int check = 0, check_2 = 0;
@@ -65,6 +65,10 @@ int main() {
                 getchar();
                 gets(nome);
                 stampa_codice(persone, check_2, nome, cognome);
+                break;
+            case 4:
+                sorting_cognome(persone, check_2 );
+                stampa_ordinato(persone, check_2 );
                 break;
             default:
                 printf("errore");
@@ -133,5 +137,23 @@ void stampa_codice(persona* persone, int count, char* nome, char* cognome) {
         if(strcmp(nome, persone[i].nome) || strcmp(cognome, persone[i].cognome)) {
             printf("il codice fiscale e: %s\n", persone[i].codice_fiscale);
         }
+    }
+}
+
+void sorting_cognome(persona* persone, int count) {
+    for (int i = 0; i < count; i++) {
+        for (int j = 0; j < count - 1; j++) {
+            if (strcmp(persone[j].cognome, persone[j+1].cognome) > 0) {
+                // scambia i due elementi
+                persona temp = persone[j];
+                persone[j] = persone[j+1];
+                persone[j+1] = temp;
+            }
+        }
+    }
+}
+void stampa_ordinato(persona* persone, int count) {
+    for(int i =0; i<count ; i++){
+        printf("il cognome e nome sono: %s %s\n", persone[i].cognome, persone[i].nome);
     }
 }
