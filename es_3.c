@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <string.h>
+#include <stdbool.h>
 #define N 100
 
 /*
@@ -16,17 +19,21 @@ typedef struct {
     char nome[20];
     char cognome[20];
     char codice_fiscale[20];
+    char comune_residenza[20];
 } persona;
 
 int stampa_menu(int);
-void aggiungi_persona(persona*);
+void aggiungi_persona(persona* );
+bool check_codice(persona*, int );
+void stampa_comune(persona*, int, char*);
 
 int main() {
     int check = 0, check_2 = 0;
+    char comune[20];
     persona persone[N];
 
     do {
-        check = stampa_menu(check);-
+        check = stampa_menu(check);
 
         switch (check) {
 
@@ -37,6 +44,16 @@ int main() {
                 }else{
                     printf("array pieno :(");
                 }
+
+                if(check_codice(persone,check_2)){
+                    check_2--;
+                }
+
+                break;
+            case 2:
+                printf("che persone di che comune vuoi stampare?");
+                scanf("%s", comune);
+                stampa_comune(persone, check_2, comune);
 
                 break;
         }
@@ -71,4 +88,30 @@ void aggiungi_persona(persona* persone) {
     printf("qual e il codice fiscale della persona che devi aggiunger?\n");
     getchar();
     gets(persone -> codice_fiscale);
+
+    printf("qual e il comnune di residenza della persona che devi aggiunger?\n");
+    getchar();
+    gets(persone -> comune_residenza);
+
+}
+
+bool check_codice(persona* persone, int count) {
+    for(int i = 0; i < count; i++) {
+        for(int j = i + 1; j<count; j++){
+
+            if(strcmp(persone[i].codice_fiscale, persone[j].codice_fiscale) == 0 ) {
+                printf("ci sono dei duplicati!\n");
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void stampa_comune(persona* persone , int count, char* comune) {
+    for(int i = 0; i < count; i++) {
+        if(strcmp(comune, persone[i].comune_residenza) ){
+            printf("%s/%s \n", persone[i].nome, persone[i].cognome);
+        }
+    }
 }
