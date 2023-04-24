@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define N 100
 
 /*
@@ -19,6 +20,8 @@ typedef struct {
 
 int stampa_menu();
 void inserisci_studente(studenti*);
+void sorting_nomi(studenti*, int);
+void stampa_studenti(studenti*, int);
 
 int main() {
     studenti studente[N];
@@ -35,6 +38,10 @@ int main() {
                 }else{
                     printf("array pieno :(");
                 }
+                break;
+            case 2:
+                sorting_nomi(studente, check_2);
+                stampa_studenti(studente, check_2);
                 break;
             case 6:
                 printf("arrivederci");
@@ -77,4 +84,24 @@ void inserisci_studente(studenti* studente) {
     getchar();
     gets(studente -> matricola);
 
+}
+
+void sorting_nomi(studenti* studente, int count){
+
+    for (int i = 0; i < count; i++) {
+        for (int j = 0; j < count - 1; j++) {
+            if (strcmp(studente[j].nome, studente[j+1].nome) > 0) {
+                // scambia i due elementi
+                studenti temp = studente[j];
+                studente[j] = studente[j+1];
+                studente[j+1] = temp;
+            }
+        }
+    }
+}
+
+void stampa_studenti(studenti* studente, int count) {
+    for(int i = 0; i < count; i++){
+        printf("gli studenti ordinati per nome sono: %s \n", studente[i].nome);
+    }
 }
