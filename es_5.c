@@ -36,6 +36,11 @@ int main() {
                     printf("array pieno :(");
                 }
                 break;
+            case 6:
+                printf("arrivederci");
+                break;
+            default:
+                printf("errore!");
         }
     }while(check !=6);
 
