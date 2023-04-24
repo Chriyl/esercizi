@@ -2,11 +2,79 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#define N 100
+/*
+ All’interno di una tabella sono memorizzate le informazioni relative al codice fornitore e all’importo lordo dovuto relative ai vari fornitori di una ditta.
+ Le informazioni devono essere memorizzate in ordine di codice,
+ con possibilità di ripetizione.
+ Realizzare un programma che consenta, per ogni fornitore, di conoscere
+ l’importo medio e, alla fine, il fornitore caratterizzato da un importo medio più alto e più basso.
+*/
+
+typedef struct {
+    char codice_fornitore[20];
+    int importo;
+
+}fornitori;
+
+int stampa_menu(int);
+int inserici_fornitore(fornitori*, int);
+
 
 int main() {
+    fornitori fornitore[N];
+    int check = 0, check_2 = 0;
+        do {
+            check = stampa_menu(check);
+            switch (check) {
+                case 1:
+                    if(check_2 < N ) {
+                       check_2 =  inserici_fornitore(&fornitore[check_2], check_2);
+                    }else {
+                        printf("array pieno :(\n");
+                    }
+                    break;
+                case 2:
+
+                    break;
+                case 5:
+                    printf("arrivederci!");
+                    break;
+                default:
+                    printf("numero non valido!\n");
+            }
+        } while (check != 5);
+
 
 
 
     return 0;
+}
+
+
+int stampa_menu(int count) {
+    printf("cosa vuoi fare?\n");
+    printf("inserire un fornitore? (1)\n");
+    printf("vedere le medie di tutti i fornitori (2)\n");
+    printf("vedere importo piu basso (3)\n");
+    printf("vedere importo piu alto (4)\n");
+    printf("uscire dal programma (5)\n");
+    scanf("%d", &count);
+
+    return count;
+}
+
+int inserici_fornitore(fornitori* fornitore, int count) {
+    printf("qual e il codice fornitore?\n");
+    getchar();
+    gets(fornitore -> codice_fornitore);
+
+    printf("qual e l'importo?\n");
+    getchar();
+    gets(fornitore -> codice_fornitore);
+
+    count++;
+
+    return count;
 }
 
