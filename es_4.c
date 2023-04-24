@@ -19,6 +19,7 @@ typedef struct {
 
 int stampa_menu(int);
 int inserici_fornitore(fornitori*, int);
+void insertion_sort(fornitori* , int );
 
 
 int main() {
@@ -78,3 +79,16 @@ int inserici_fornitore(fornitori* fornitore, int count) {
     return count;
 }
 
+void insertion_sort(fornitori* arr, int n) {
+    int i, j;
+    fornitori temp;
+    for (i = 1; i < n; i++) {
+        temp = arr[i];
+        j = i - 1;
+        while (j >= 0 && strcmp(arr[j].codice_fornitore, temp.codice_fornitore) > 0) {
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = temp;
+    }
+}
