@@ -22,11 +22,11 @@ int stampa_menu(int);
 int inserici_fornitore(fornitori*, int);
 void insertion_sort(fornitori* , int );
 void media_fornitori(fornitori*, int);
-void importo_max_min(fornitori*, int count);
-
+int max(fornitori* , int );
+int min(fornitori*, int  );
 int main() {
     fornitori fornitore[N];
-    int check = 0, check_2 = 0, media[N];
+    int check = 0, check_2 = 0, media[N], index_min = 0, index_max = 0;
         do {
             check = stampa_menu(check);
             switch (check) {
@@ -41,7 +41,14 @@ int main() {
                     insertion_sort(fornitore,check_2);
                     media_fornitori(fornitore,  check_2 );
                     break;
-                case 5:
+                case 3:
+                    index_max = max(fornitore, check_2);
+                    index_min = min(fornitore, check_2);
+
+                    printf("il fornitore con la media piu bassa e %s con %d di media ", fornitore[index_min].codice_fornitore , fornitore[index_min].media);
+                    printf("il fornitore con la media piu alta e %s con %d di media ", fornitore[index_max].codice_fornitore , fornitore[index_max].media);
+                    break;
+                case 4:
                     printf("arrivederci!");
                     break;
                 default:
@@ -60,9 +67,8 @@ int stampa_menu(int count) {
     printf("cosa vuoi fare?\n");
     printf("inserire un fornitore? (1)\n");
     printf("vedere le medie di tutti i fornitori (2)\n");
-    printf("vedere importo piu basso (3)\n");
-    printf("vedere importo piu alto (4)\n");
-    printf("uscire dal programma (5)\n");
+    printf("vedere importo piu basso e importo piu alto (3)\n");
+    printf("uscire dal programma (4)\n");
     scanf("%d", &count);
 
     return count;
@@ -113,10 +119,29 @@ void media_fornitori(fornitori* fornitore, int count ) {
     }
 }
 
-void importo_max_min(fornitori*, int count) {
+int max(fornitori* fornitore, int count) {
+    int max = INT_MIN;
+    int check = 0;
+
     for(int i = 0; i < count; i++) {
-        for (int j = 0; i < count; j++) {
+        if(fornitore[i].media > max) {
+            max = fornitore[i].media;
+            check++;
 
         }
     }
+    return check;
+}
+
+int min(fornitori* fornitore, int count ) {
+    int min = INT_MAX;
+    int check = 0;
+
+    for(int i = 0; i < count; i++) {
+        if(fornitore[i].media < min) {
+            min = fornitore[i].media;
+            check++;
+        }
+    }
+    return check;
 }
