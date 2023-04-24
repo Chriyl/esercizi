@@ -22,6 +22,8 @@ int stampa_menu();
 void inserisci_studente(studenti*);
 void sorting_nomi(studenti*, int);
 void stampa_studenti(studenti*, int);
+void sorting_conomi(studenti* , int );
+void stampa_studenti_cognome(studenti* , int );
 
 int main() {
     studenti studente[N];
@@ -42,6 +44,13 @@ int main() {
             case 2:
                 sorting_nomi(studente, check_2);
                 stampa_studenti(studente, check_2);
+                break;
+            case 3:
+                sorting_conomi(studente, check_2);
+                stampa_studenti_cognome(studente, check_2);
+                break;
+            case 4:
+
                 break;
             case 6:
                 printf("arrivederci");
@@ -103,5 +112,25 @@ void sorting_nomi(studenti* studente, int count){
 void stampa_studenti(studenti* studente, int count) {
     for(int i = 0; i < count; i++){
         printf("gli studenti ordinati per nome sono: %s \n", studente[i].nome);
+    }
+}
+
+void sorting_conomi(studenti* studente, int count){
+
+    for (int i = 0; i < count; i++) {
+        for (int j = 0; j < count - 1; j++) {
+            if (strcmp(studente[j].cognome, studente[j+1].cognome) > 0) {
+                // scambia i due elementi
+                studenti temp = studente[j];
+                studente[j] = studente[j+1];
+                studente[j+1] = temp;
+            }
+        }
+    }
+}
+
+void stampa_studenti_cognome(studenti* studente, int count) {
+    for(int i = 0; i < count; i++){
+        printf("gli studenti ordinati per cognome sono: %s \n", studente[i].cognome);
     }
 }
