@@ -179,6 +179,6 @@ void sorting_matricola(studenti* studente , int count ) {
 
 void stampa_studenti_matricola(studenti* studente , int count ) {
     for(int i = 0; i < count; i++){
-        printf("gli studenti ordinati per assenze sono: %s assenze: %d \n", studente[i].nome, studente[i].assenze);
+        printf("gli studenti ordinati per assenze sono: %s assenze: %d \n", studente[i].nome, studente[i].matricola);
     }
 }
