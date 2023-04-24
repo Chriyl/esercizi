@@ -21,9 +21,14 @@ typedef struct {
 int stampa_menu();
 void inserisci_studente(studenti*);
 void sorting_nomi(studenti*, int);
-void stampa_studenti(studenti*, int);
+void stampa_studenti_nome(studenti*, int);
 void sorting_conomi(studenti* , int );
 void stampa_studenti_cognome(studenti* , int );
+void sorting_assenze (studenti* , int );
+void stampa_studenti_assenze(studenti* , int );
+void sorting_matricola(studenti* , int );
+void stampa_studenti_matricola(studenti*, int);
+
 
 int main() {
     studenti studente[N];
@@ -43,14 +48,19 @@ int main() {
                 break;
             case 2:
                 sorting_nomi(studente, check_2);
-                stampa_studenti(studente, check_2);
+                stampa_studenti_nome(studente, check_2);
                 break;
             case 3:
                 sorting_conomi(studente, check_2);
                 stampa_studenti_cognome(studente, check_2);
                 break;
             case 4:
-
+                sorting_assenze(studente, check_2);
+                stampa_studenti_assenze(studente, check_2);
+                break;
+            case 5:
+                sorting_matricola(studente, check_2);
+                stampa_studenti_matricola(studente, check_2);
                 break;
             case 6:
                 printf("arrivederci");
@@ -109,7 +119,7 @@ void sorting_nomi(studenti* studente, int count){
     }
 }
 
-void stampa_studenti(studenti* studente, int count) {
+void stampa_studenti_nome(studenti* studente, int count) {
     for(int i = 0; i < count; i++){
         printf("gli studenti ordinati per nome sono: %s \n", studente[i].nome);
     }
@@ -132,5 +142,43 @@ void sorting_conomi(studenti* studente, int count){
 void stampa_studenti_cognome(studenti* studente, int count) {
     for(int i = 0; i < count; i++){
         printf("gli studenti ordinati per cognome sono: %s \n", studente[i].cognome);
+    }
+}
+
+void sorting_assenze (studenti* studente  , int count ) {
+    for (int i = 0; i < count; i++) {
+        for (int j = 0; j < count - 1; j++) {
+            if (studente[j].cognome > studente[j+1].cognome)  {
+                // scambia i due elementi
+                studenti temp = studente[j];
+                studente[j] = studente[j+1];
+                studente[j+1] = temp;
+            }
+        }
+    }
+}
+
+void stampa_studenti_assenze(studenti* studente , int count ) {
+    for(int i = 0; i < count; i++){
+        printf("gli studenti ordinati per assenze sono: %s assenze: %d \n", studente[i].nome, studente[i].assenze);
+    }
+}
+
+void sorting_matricola(studenti* studente , int count ) {
+    for (int i = 0; i < count; i++) {
+        for (int j = 0; j < count - 1; j++) {
+            if (strcmp(studente[j].matricola, studente[j+1].matricola) > 0) {
+                // scambia i due elementi
+                studenti temp = studente[j];
+                studente[j] = studente[j+1];
+                studente[j+1] = temp;
+            }
+        }
+    }
+}
+
+void stampa_studenti_matricola(studenti* studente , int count ) {
+    for(int i = 0; i < count; i++){
+        printf("gli studenti ordinati per assenze sono: %s assenze: %d \n", studente[i].nome, studente[i].assenze);
     }
 }
