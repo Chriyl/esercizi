@@ -14,17 +14,19 @@
 typedef struct {
     char codice_fornitore[20];
     int importo;
+    int media;
 
 }fornitori;
 
 int stampa_menu(int);
 int inserici_fornitore(fornitori*, int);
 void insertion_sort(fornitori* , int );
-
+void media_fornitori(fornitori*, int);
+void importo_max_min(fornitori*, int count);
 
 int main() {
     fornitori fornitore[N];
-    int check = 0, check_2 = 0;
+    int check = 0, check_2 = 0, media[N];
         do {
             check = stampa_menu(check);
             switch (check) {
@@ -36,7 +38,8 @@ int main() {
                     }
                     break;
                 case 2:
-
+                    insertion_sort(fornitore,check_2);
+                    media_fornitori(fornitore,  check_2 );
                     break;
                 case 5:
                     printf("arrivederci!");
@@ -72,7 +75,7 @@ int inserici_fornitore(fornitori* fornitore, int count) {
 
     printf("qual e l'importo?\n");
     getchar();
-    gets(fornitore -> codice_fornitore);
+    scanf("%d", &fornitore -> importo);
 
     count++;
 
@@ -90,5 +93,30 @@ void insertion_sort(fornitori* arr, int n) {
             j--;
         }
         arr[j+1] = temp;
+    }
+}
+
+void media_fornitori(fornitori* fornitore, int count ) {
+    for (int i = 0; i < count; i++) {
+        int check = 0;
+        int media = fornitore[i].importo;
+        for (int j = i + 1; j < count; j++) {
+            if (strcmp(fornitore[i].codice_fornitore, fornitore[j].codice_fornitore) == 0) {
+                media += fornitore[j].importo;
+                check++;
+            }
+        }
+        if (check > 0) {
+            media /= (check + 1);
+        }
+        printf("La media del fornitore %s e: %d\n", fornitore[i].codice_fornitore, media);
+    }
+}
+
+void importo_max_min(fornitori*, int count) {
+    for(int i = 0; i < count; i++) {
+        for (int j = 0; i < count; j++) {
+
+        }
     }
 }
