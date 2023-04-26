@@ -29,12 +29,23 @@ typedef struct {
 
 }films;
 
+int stampaMenu();
+void aggiungi_film(films* );
 int main() {
     int check  = 0 , check_2 = 0;
+    films film[N];
 
     do {
+
+        check = stampaMenu();
         switch (check) {
             case 1:
+                if(check_2 < N) {
+                    aggiungi_film(&film[check_2]);
+                    check_2++;
+                }else {
+                    printf("array pieno");
+                }
                 break;
             case 2:
                 break;
@@ -50,4 +61,47 @@ int main() {
     } while (check !=5);
 
     return 0;
+}
+
+int stampaMenu( ) {
+    int count = 0;
+    printf("cosa vuoi fare?\n");
+    printf("inserisci un film (1)\n");
+    printf("cambiare i dati di un film (2)\n");
+    printf("vedere un film (3)\n");
+    printf("uscire dal programma (4)\n");
+    scanf("%d", &count);
+    return count;
+
+}
+
+void aggiungi_film(films* film ) {
+    printf("come si chiama il film che vuoi inserire?\n");
+    getchar();
+    gets(film -> nome);
+
+    printf("come si chiama il protagonista del film che vuoi inserire?\n");
+    getchar();
+    gets(film -> protagonista);
+
+    printf("come si chiama il regista del film che vuoi inserire?\n");
+    getchar();
+    gets(film -> regista);
+
+    printf("qual e il genere film che vuoi inserire?\n");
+    getchar();
+    gets(film -> genere);
+
+    printf("qual e  il codice del film che vuoi inserire?\n");
+    getchar();
+    gets(film -> codice);
+
+    printf("qual e il genere del film che vuoi inserire?\n");
+    getchar();
+    gets(film -> genere);
+
+    printf("qual e l'anno di uscita del film che vuoi inserire?\n");
+    getchar();
+    scanf("%" , &film -> anno);
+
 }
